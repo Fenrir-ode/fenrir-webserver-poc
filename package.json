@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "cue-parser": "^0.3.0",
+    "mime-types": "^2.1.31"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/mime-types": "^2.1.0",
+    "@types/node": "^15.12.4",
+    "concurrently": "^6.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
+  },
+  "scripts": {
+    "build": "npm run build-ts",
+    "build-ts": "tsc",
+    "debug": "npm run build && npm run watch-debug",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "serve-debug": "nodemon --inspect dist/app.js",
+    "serve": "node dist/app.js",
+    "start": "npm run serve",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "watch-node": "nodemon dist/app.js",
+    "watch-ts": "tsc -w",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+  }
+}
